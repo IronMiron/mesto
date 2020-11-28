@@ -1,0 +1,9 @@
+.profile__info {
+    margin-left: 30px;
+    display: flex;
+    flex-direction: row;
+    width: 336px;
+    justify-content: space-between;
+    align-items: center;
+    color: #FFF;
+}
