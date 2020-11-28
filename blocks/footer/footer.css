@@ -1,0 +1,4 @@
+.footer {
+    min-width: 282px;
+    width: calc(100% * 880 / 1280);
+}
