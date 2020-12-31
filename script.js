@@ -8,6 +8,8 @@ let popup_name = document.querySelector('.popup__input_name');
 let popup_occupation = document.querySelector('.popup__input_occupation');
 
 function showEditPopup() {
+    popup_name.value = profile_name.textContent;
+    popup_occupation.value = profile_occupation.textContent;
     popup.classList.add('popup_opened');
 }
 
@@ -16,6 +18,8 @@ function closeEditPopup() {
 }
 
 function saveAndClose() {
+    profile_name.textContent = popup_name.value;
+    profile_occupation.textContent = popup_occupation.value;
     popup.classList.remove('popup_opened');
 }
 
