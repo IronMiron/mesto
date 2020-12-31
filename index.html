@@ -10,10 +10,11 @@
     <meta name="author" content="Андрей Миронов">
 </head>
 <body class="body">
-    <div class="main-page">
+    <div class="page">
         <header class="header">
-            <img class="header__logo" src="images/logo.svg" alt="Место(Россия)">
-            <div class="header__line"></div>
+            <a href="https://ironmiron.github.io/mesto/index.html" target="_blank">
+                <img class="header__logo" src="images/logo.svg" alt="Место(Россия)">
+            </a>
         </header>
         <main class="content">
             <section class="profile">
@@ -21,59 +22,57 @@
                     <img class="profile__avatar" src="images/avatar.png" alt="Аватарка">
                     <div class="profile__fields">
                         <div class="profile__field">
-                            <p class="profile__name">Жак-Ив Кусто</p>
-                            <div class="profile__button profile__button_fnc_edit"></div>
+                            <h1 class="profile__name">Жак-Ив Кусто</h1>
+                            <button type="button" class="button button_type_edit"></button>
                         </div>
-                        <div class="profile__field">
-                            <p class="profile__occupation">Исследователь океана</p>
-                        </div>
+                        <p class="profile__occupation">Исследователь океана</p>
                     </div>
                 </div>
-                <div class="profile__button profile__button_fnc_add"></div>
+                <button type="button" class="button button_type_add"></button>
             </section>
-            <section class="elements">
-                <div class="element">
-                    <img class="element__pic" src="images/pic01.png" alt="Карачаевск">
-                    <div class="element__info">
-                        <p class="element__descr">Карачаевск</p>
-                        <img class="element__like" src="images/like.svg" alt="Лайк">
+            <section class="cards">
+                <article class="card">
+                    <img class="card__pic" src="images/pic01.png" alt="Карачаевск">
+                    <div class="card__info">
+                        <h3 class="card__descr">Карачаевск</h3>
+                        <button type="button" class="button button_type_like"></button>
                     </div>
-                </div>
-                <div class="element">
-                    <img class="element__pic" src="images/pic02.png" alt="Гора Эльбрус">
-                    <div class="element__info">
-                        <p class="element__descr">Гора Эльбрус</p>
-                        <img class="element__like" src="images/like.svg" alt="Лайк">
+                </article>
+                <article class="card">
+                    <img class="card__pic" src="images/pic02.png" alt="Гора Эльбрус">
+                    <div class="card__info">
+                        <h3 class="card__descr">Гора Эльбрус</h3>
+                        <button type="button" class="button button_type_like"></button>
                     </div>
-                </div>
-                <div class="element">
-                    <img class="element__pic" src="images/pic03.png" alt="Домбай">
-                    <div class="element__info">
-                        <p class="element__descr">Домбай</p>
-                        <img class="element__like" src="images/like.svg" alt="Лайк">
+                </article>
+                <article class="card">
+                    <img class="card__pic" src="images/pic03.png" alt="Домбай">
+                    <div class="card__info">
+                        <h3 class="card__descr">Домбай</h3>
+                        <button type="button" class="button button_type_like"></button>
                     </div>
-                </div>
-                <div class="element">
-                    <img class="element__pic" src="images/pic04.png" alt="Гора Эльбрус">
-                    <div class="element__info">
-                        <p class="element__descr">Гора Эльбрус</p>
-                        <img class="element__like" src="images/like.svg" alt="Лайк">
+                </article>
+                <article class="card">
+                    <img class="card__pic" src="images/pic04.png" alt="Гора Эльбрус">
+                    <div class="card__info">
+                        <h3 class="card__descr">Гора Эльбрус</h3>
+                        <button type="button" class="button button_type_like"></button>
                     </div>
-                </div>
-                <div class="element">
-                    <img class="element__pic" src="images/pic05.png" alt="Домбай">
-                    <div class="element__info">
-                        <p class="element__descr">Домбай</p>
-                        <img class="element__like" src="images/like.svg" alt="Лайк">
+                </article>
+                <article class="card">
+                    <img class="card__pic" src="images/pic05.png" alt="Домбай">
+                    <div class="card__info">
+                        <h3 class="card__descr">Домбай</h3>
+                        <button type="button" class="button button_type_like"></button>
                     </div>
-                </div>
-                <div class="element">
-                    <img class="element__pic" src="images/pic06.png" alt="Карачаево-Черкесск">
-                    <div class="element__info">
-                        <p class="element__descr">Карачаево-Черкесск</p>
-                        <img class="element__like" src="images/like.svg" alt="Лайк">
+                </article>
+                <article class="card">
+                    <img class="card__pic" src="images/pic06.png" alt="Карачаево-Черкесск">
+                    <div class="card__info">
+                        <h3 class="card__descr">Карачаево-Черкесск</h3>
+                        <button type="button" class="button button_type_like"></button>
                     </div>
-                </div>
+                </article>
             </section>
         </main>
         <footer class="footer">
@@ -81,16 +80,16 @@
         </footer>
     </div>
     <div class="popup">
-        <div class="popup__container">
-            <div class="popup__button popup__button_fnc_close"></div>
+        <form class="popup__container" name="popupEdit">
+            <button type="button" class="button button_type_close"></button>
             <h2 class="popup__header">Редактировать профиль</h2>
-            <input type="text" placeholder="Имя" class="popup__input popup__name">
-            <input type="text" placeholder="Профессия" class="popup__input popup__occupation">
-            <button class="popup__button popup__button_fnc_save">
+            <input type="text" placeholder="Имя" class="popup__input popup__name" name="inputName">
+            <input type="text" placeholder="Профессия" class="popup__input popup__occupation" name="inputOccupation">
+            <button type="submit" class="button button_type_save" name="buttonSave">
                 Сохранить
             </button>
-        </div>
+        </form>
     </div>
-    <script src="script.js"></script>
+    <script src="scripts/script.js"></script>
 </body>
 </html>

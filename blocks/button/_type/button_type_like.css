@@ -1,0 +1,14 @@
+.button_type_like {
+    background-color: rgba(0, 0, 0, 0);
+    background-image: url(../../../images/like.svg);
+    width: 21px;
+    height: 19px;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin-right: 15px;
+    border: none;
+}
+
+.button_type_like:hover {
+    opacity: .6;
+}

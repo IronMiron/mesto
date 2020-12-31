@@ -1,5 +1,6 @@
-.profile__button_fnc_add {
-    background-image: url(../../../../images/btn_add.svg);
+.button_type_add {
+    background-color: rgba(0, 0, 0, 1);
+    background-image: url(../../../images/btn_add.svg);
     width: 146px;
     height: 46px;
     background-position: center;
@@ -8,8 +9,12 @@
 }
 
 @media screen and (max-width: 1000px) {
-    .profile__button_fnc_add {
+    .button_type_add {
         width: 100%;
         margin-top: 36px;
     }
+}
+
+.button_type_add:hover {
+    opacity: .6;
 }
