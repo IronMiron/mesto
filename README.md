@@ -25,7 +25,7 @@
 **Сслыка на проект**
 
 Проект сохранён на хост GitHub Pages для прямого доступа к просмотру результатов работы.
-[Путешествие по России](https://ironmiron.github.io/mesto/index.html)
+[Место](https://ironmiron.github.io/mesto/index.html)
 
 **Контакты**
 
