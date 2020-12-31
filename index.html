@@ -17,56 +17,60 @@
         </header>
         <main class="content">
             <section class="profile">
-                <img class="profile__avatar" src="images/avatar.png" alt="Аватарка">
                 <div class="profile__info">
+                    <img class="profile__avatar" src="images/avatar.png" alt="Аватарка">
                     <div class="profile__fields">
-                        <p class="profile__field profile__field_name">Ермак Тимофеевич</p>
-                        <p class="profile__field profile__field_occupation">Казачий атаман</p>
+                        <div class="profile__field">
+                            <p class="profile__field_name">Жак-Ив Кусто</p>
+                            <div class="profile__button profile__button_fnc_edit"></div>
+                        </div>
+                        <div class="profile__field">
+                            <p class="profile__field_occupation">Исследователь океана</p>
+                        </div>
                     </div>
-                    <div class="profile__button profile__button_fnc_edit"></div>
                 </div>
                 <div class="profile__button profile__button_fnc_add"></div>
             </section>
             <section class="elements">
                 <div class="element">
-                    <img class="element__pic" src="" alt="">
+                    <img class="element__pic" src="images/pic01.png" alt="Карачаевск">
                     <div class="element__info">
-                        <p class="element__descr">Могилёв</p>
+                        <p class="element__descr">Карачаевск</p>
                         <img class="element__like" src="images/like.svg" alt="Лайк">
                     </div>
                 </div>
                 <div class="element">
-                    <img class="element__pic" src="" alt="">
+                    <img class="element__pic" src="images/pic02.png" alt="Гора Эльбрус">
                     <div class="element__info">
-                        <p class="element__descr">Туринск</p>
+                        <p class="element__descr">Гора Эльбрус</p>
                         <img class="element__like" src="images/like.svg" alt="Лайк">
                     </div>
                 </div>
                 <div class="element">
-                    <img class="element__pic" src="" alt="">
+                    <img class="element__pic" src="images/pic03.png" alt="Домбай">
                     <div class="element__info">
-                        <p class="element__descr">Река Иртыш</p>
+                        <p class="element__descr">Домбай</p>
                         <img class="element__like" src="images/like.svg" alt="Лайк">
                     </div>
                 </div>
                 <div class="element">
-                    <img class="element__pic" src="" alt="">
+                    <img class="element__pic" src="images/pic04.png" alt="Гора Эльбрус">
                     <div class="element__info">
-                        <p class="element__descr">Река Тавда</p>
+                        <p class="element__descr">Гора Эльбрус</p>
                         <img class="element__like" src="images/like.svg" alt="Лайк">
                     </div>
                 </div>
                 <div class="element">
-                    <img class="element__pic" src="" alt="">
+                    <img class="element__pic" src="images/pic05.png" alt="Домбай">
                     <div class="element__info">
-                        <p class="element__descr">Река Назым</p>
+                        <p class="element__descr">Домбай</p>
                         <img class="element__like" src="images/like.svg" alt="Лайк">
                     </div>
                 </div>
                 <div class="element">
-                    <img class="element__pic" src="" alt="">
+                    <img class="element__pic" src="images/pic06.png" alt="Карачаево-Черкесск">
                     <div class="element__info">
-                        <p class="element__descr">Кашлык</p>
+                        <p class="element__descr">Карачаево-Черкесск</p>
                         <img class="element__like" src="images/like.svg" alt="Лайк">
                     </div>
                 </div>
@@ -76,8 +80,16 @@
             <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
         </footer>
     </div>
-    <div class="edit-form">
-        
+    <div class="popup">
+        <div class="popup__container">
+            <div class="popup__button popup__button_fnc_close"></div>
+            <input type="text" placeholder="Имя" class="popup__input popup__input_name" value="Жак-Ив Кусто">
+            <input type="text" placeholder="Профессия" class="popup__input popup__input_occupation" value="Исследователь океана">
+            <button class="popup__button popup__button_fnc_save">
+                Сохранить
+            </button>
+        </div>
     </div>
+    <script src="script.js"></script>
 </body>
 </html>

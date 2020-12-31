@@ -1,0 +1,4 @@
+.element__pic {
+    object-fit: contain;
+    width: 100%;
+}

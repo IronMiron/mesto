@@ -1,9 +1,16 @@
 .profile__info {
-    margin-left: 30px;
     display: flex;
     flex-direction: row;
-    width: 336px;
+    width: 486px;
     justify-content: space-between;
     align-items: center;
     color: #FFF;
+}
+
+@media screen and (max-width: 768px) {
+    .profile__info {
+        flex-direction: column;
+        width: 100%;
+        justify-content: flex-start;
+    }
 }
