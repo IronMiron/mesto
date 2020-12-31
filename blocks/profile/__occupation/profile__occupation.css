@@ -1,4 +1,4 @@
-.profile__field_occupation {
+.profile__occupation {
     font-weight: normal;
     font-size: 18px;
     line-height: 22px;
@@ -9,7 +9,7 @@
 }
 
 @media screen and (max-width: 768px) {
-    .profile__field_occupation {
+    .profile__occupation {
         margin: 14px 0 0;
         font-size: 14px;
         line-height: 17px;

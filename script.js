@@ -2,10 +2,10 @@ let popup = document.querySelector('.popup');
 let edit_btn = document.querySelector('.profile__button_fnc_edit');
 let close_btn = document.querySelector('.popup__button_fnc_close');
 let save_btn = document.querySelector('.popup__button_fnc_save');
-let profile_name = document.querySelector('.profile__field_name');
-let profile_occupation = document.querySelector('.profile__field_occupation');
-let popup_name = document.querySelector('.popup__input_name');
-let popup_occupation = document.querySelector('.popup__input_occupation');
+let profile_name = document.querySelector('.profile__name');
+let profile_occupation = document.querySelector('.profile__occupation');
+let popup_name = document.querySelector('.popup__name');
+let popup_occupation = document.querySelector('.popup__occupation');
 
 function showEditPopup() {
     popup_name.value = profile_name.textContent;
