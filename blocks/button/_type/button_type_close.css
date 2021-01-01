@@ -18,7 +18,6 @@
 @media screen and (max-width: 768px) {
     .button_type_close {
         right: 0;
-        top: -50px;
         width: 37px;
         height: 37px;
         background-size: 37px 37px;
