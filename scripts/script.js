@@ -60,7 +60,12 @@ function showEditPopup(evt) {
 }
 
 function closePopup(evt) {
-    evt.target.closest('.popup').classList.remove('popup_opened');
+    function close(evt) {
+        evt.target.closest('.popup').classList.remove('popup_opened');
+        evt.target.closest('.popup').classList.remove('popup_closing');
+    }
+    evt.target.closest('.popup').classList.add('popup_closing');
+    setTimeout( close, 1000, evt);
 }
 
 function saveAndClose(evt) {
