@@ -43,12 +43,12 @@ function showEditPopup(evt) {
     popupInputName.value = profileName.textContent;
     popupInputOccupation.value = profileOccupation.textContent;
     openPopup(editFormContainer);
-    validateInput();
+//    validateInput();
 }
 
 function showAddPopup(evt) {
     openPopup(addFormContainer);
-    validateInput();
+//    validateInput();
 }
 
 function closePopup(evt) {
