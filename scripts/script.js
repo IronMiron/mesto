@@ -1,5 +1,5 @@
-const editForm = document.querySelector('#editForm');
-const addForm = document.querySelector('#addForm');
+const editFormContainer = document.querySelector('#editForm');
+const addFormContainer = document.querySelector('#addForm');
 const cardImage = document.querySelector('#cardImage');
 const profileName = document.querySelector('.profile__name');
 const profileOccupation = document.querySelector('.profile__occupation');
@@ -40,15 +40,14 @@ const initialCards = [
 
 
 function showEditPopup(evt) {
-    if (evt.target.className.includes('button_type_edit')) {
-        popupInputName.value = profileName.textContent;
-        popupInputOccupation.value = profileOccupation.textContent;
-        openPopup(editForm);
-    }
-    else if (evt.target.className.includes('button_type_add')) {
-        openPopup(addForm);
-    }
-    else return;
+    popupInputName.value = profileName.textContent;
+    popupInputOccupation.value = profileOccupation.textContent;
+    openPopup(editFormContainer);
+    validateInput();
+}
+
+function showAddPopup(evt) {
+    openPopup(addFormContainer);
     validateInput();
 }
 
@@ -70,17 +69,18 @@ function openPopup(popupElement) {
     popupElement.classList.add('popup_opened');
 }
 
-function saveAndClose(evt) {
+function saveAndCloseEdit(evt) {
     evt.preventDefault();
-    const curForm = evt.target.closest('.popup__container');
-    if (curForm.name === 'editForm') {
-        profileName.textContent = popupInputName.value;
-        profileOccupation.textContent = popupInputOccupation.value;
-    }
-    else if (curForm.name === 'addForm') {
-        cardsSection.prepend(createCard(popupInputDescr.value, popupInputUrl.value));
-    }
-    curForm.reset();
+    profileName.textContent = popupInputName.value;
+    profileOccupation.textContent = popupInputOccupation.value;
+    document.forms.editForm.reset();
+    closePopup(evt);
+}
+
+function saveAndCloseAdd(evt) {
+    evt.preventDefault();
+    cardsSection.prepend(createCard(popupInputDescr.value, popupInputUrl.value));
+    document.forms.addForm.reset();
     closePopup(evt);
 }
 
@@ -132,13 +132,12 @@ function clickOverlay(evt) {
 
 
 document.querySelector('.button_type_edit').addEventListener('click', showEditPopup);
-document.querySelector('.button_type_add').addEventListener('click', showEditPopup);
+document.querySelector('.button_type_add').addEventListener('click', showAddPopup);
 document.querySelectorAll('.button_type_close').forEach((item) => {
     item.addEventListener('click', closePopup);
 });
-Array.from(document.forms).forEach((item) => {
-    item.addEventListener('submit', saveAndClose);
-});
+editFormContainer.addEventListener('submit', saveAndCloseEdit);
+addFormContainer.addEventListener('submit', saveAndCloseAdd);
 initialCards.forEach((item) => {
     cardsSection.prepend(createCard(item.name, item.link));
 });
