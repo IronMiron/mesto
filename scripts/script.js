@@ -49,10 +49,21 @@ function showEditPopup(evt) {
         openPopup(addForm);
     }
     else return;
+    validateInput();
 }
 
 function closePopup(evt) {
-    evt.target.closest('.popup').classList.remove('popup_opened');
+    let curPopup;
+    if (evt) {
+        curPopup = evt.target.closest('.popup');
+    }
+    else {
+        curPopup = document.querySelector('.popup_opened');
+    }
+    curPopup.classList.remove('popup_opened');
+    Array.from(document.forms).forEach((form) => {
+        form.reset();
+    })
 }
 
 function openPopup(popupElement) {
@@ -99,6 +110,25 @@ function showImagePopup(evt) {
     openPopup(cardImage);
 }
 
+function pressKey(evt) {
+    switch(evt.key) {
+        case 'Escape':
+            const curPopup = document.querySelector('.popup_opened');
+            if (curPopup) {
+                closePopup();
+            }
+            break;
+        default:
+            break;
+    }
+}
+
+function clickOverlay(evt) {
+    if (evt.target.classList.contains('popup')) {
+        closePopup(evt);
+    }
+}
+
 
 
 document.querySelector('.button_type_edit').addEventListener('click', showEditPopup);
@@ -111,4 +141,16 @@ Array.from(document.forms).forEach((item) => {
 });
 initialCards.forEach((item) => {
     cardsSection.prepend(createCard(item.name, item.link));
+});
+document.querySelectorAll('.popup').forEach((item) => {
+    item.addEventListener('mousedown', clickOverlay);
+});
+document.addEventListener('keyup', pressKey);
+enableValidation({
+    formSelector: '.popup__container',
+    inputSelector: '.popup__input',
+    submitButtonSelector: '.button_type_save',
+    inactiveButtonClass: '.button_type_disabled',
+    inputErrorClass: '.popup__input_type_error',
+    errorClass: ''
 });
