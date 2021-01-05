@@ -8,6 +8,7 @@ const popupInputOccupation = document.forms.editForm.elements.inputOccupation;
 const popupInputDescr = document.forms.addForm.elements.inputDescr;
 const popupInputUrl = document.forms.addForm.elements.inputUrl;
 const popupImage = document.querySelector('.popup__image');
+const popupImageTitle = document.querySelector('.popup__image-title');
 const initialCards = [
     {
       name: 'Архыз',
@@ -43,53 +44,43 @@ function showEditPopup(evt) {
     popupInputName.value = profileName.textContent;
     popupInputOccupation.value = profileOccupation.textContent;
     openPopup(editFormContainer);
-    validateForm(editFormContainer);
-    document.addEventListener('keyup', pressKey);
+    validateForm(editFormContainer, settings);
 }
 
 function showAddPopup(evt) {
     document.forms.addForm.reset();
     openPopup(addFormContainer);
-    validateForm(addFormContainer);
-    document.addEventListener('keyup', pressKey);
+    validateForm(addFormContainer, settings);
 }
 
-function showImagePopup(evt) {
-    popupImage.src = evt.target.src;
-    popupImage.alt = evt.target.alt;
+function showImagePopup(name, link) {
+    popupImage.src = link;
+    popupImage.alt = name;
+    popupImageTitle.textContent = name;
     openPopup(cardImage);
-    document.addEventListener('keyup', pressKey);
 }
 
 function closePopup(evt) {
-    let curPopup;
-    if (evt) {
-        curPopup = evt.target.closest('.popup');
-    }
-    else {
-        curPopup = document.querySelector('.popup_opened');
-    }
-    curPopup.classList.remove('popup_opened');
+    document.querySelector('.popup_opened').classList.remove('popup_opened');
     document.removeEventListener('keyup', pressKey);
 }
 
 function openPopup(popupElement) {
+    document.addEventListener('keyup', pressKey);
     popupElement.classList.add('popup_opened');
 }
 
 function saveAndCloseEdit(evt) {
-    evt.preventDefault();
     profileName.textContent = popupInputName.value;
     profileOccupation.textContent = popupInputOccupation.value;
     document.forms.editForm.reset();
-    closePopup(evt);
+    closePopup();
 }
 
 function saveAndCloseAdd(evt) {
-    evt.preventDefault();
     cardsSection.prepend(createCard(popupInputDescr.value, popupInputUrl.value));
     document.forms.addForm.reset();
-    closePopup(evt);
+    closePopup();
 }
 
 function createCard(name, link) {
@@ -100,7 +91,9 @@ function createCard(name, link) {
     cardElement.querySelector('.card__descr').textContent = name;
     cardElement.querySelector('.button_type_trash').addEventListener('click', removeCard);
     cardElement.querySelector('.button_type_like').addEventListener('click', likeCard);
-    cardPic.addEventListener('click', showImagePopup);
+    cardPic.addEventListener('click', () => {
+        showImagePopup(name, link);
+    });
     return cardElement;
 }
 
@@ -121,32 +114,23 @@ function pressKey(evt) {
     }
 }
 
-function clickOverlay(evt) {
-    if (evt.target.classList.contains('popup')) {
-        closePopup(evt);
-    }
-}
-
 
 
 document.querySelector('.button_type_edit').addEventListener('click', showEditPopup);
 document.querySelector('.button_type_add').addEventListener('click', showAddPopup);
-document.querySelectorAll('.button_type_close').forEach((item) => {
-    item.addEventListener('click', closePopup);
-});
 editFormContainer.addEventListener('submit', saveAndCloseEdit);
 addFormContainer.addEventListener('submit', saveAndCloseAdd);
 initialCards.forEach((item) => {
     cardsSection.prepend(createCard(item.name, item.link));
 });
-document.querySelectorAll('.popup').forEach((item) => {
-    item.addEventListener('mousedown', clickOverlay);
-});
-enableValidation({
-    formSelector: '.popup__container',
-    inputSelector: '.popup__input',
-    submitButtonSelector: '.button_type_save',
-    inactiveButtonClass: '.button_type_disabled',
-    inputErrorClass: '.popup__input_type_error',
-    errorClass: ''
+document.querySelectorAll('.popup').forEach((popup) => {
+    popup.addEventListener('mousedown', (evt) => {
+        const elementClasses = evt.target.classList;
+        if (elementClasses.contains('popup_opened')) {
+            closePopup();
+        }
+        if (elementClasses.contains('button_type_close')) {
+            closePopup();
+        }
+    });
 });
