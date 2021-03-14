@@ -12,38 +12,45 @@ export default class Card {
     }
 
     getCard() {
-        const cardElement = this._template.cloneNode(true);
-        this._setPic(cardElement);
-        this._setDescr(cardElement);
-        this._setEventListeners(cardElement);
-        return cardElement;
+        if (!this._element) {
+            this._element = this._getTemplate();
+            this._setPicture();
+            this._setDescription();
+            this._setEventListeners();
+        }
+        return this._element;
     }
 
-    _setPic(cardElement) {
-        const cardPic = cardElement.querySelector('.card__pic');
-        cardPic.src = this._link;
-        cardPic.alt = this._name;
+    _getTemplate() {
+        return this._template.cloneNode(true);
     }
 
-    _setDescr(cardElement) {
-        const cardDescr = cardElement.querySelector('.card__descr');
-        cardDescr.textContent = this._name;
+    _setPicture() {
+        const cardPicture = this._element.querySelector('.card__pic');
+        cardPicture.src = this._link;
+        cardPicture.alt = this._name;
     }
 
-    _setEventListeners(cardElement) {
-        cardElement.querySelector('.button_type_trash').addEventListener('click', (evt) => {
+    _setDescription() {
+        const cardDescription = this._element.querySelector('.card__descr');
+        cardDescription.textContent = this._name;
+    }
+
+    _setEventListeners() {
+        this._element.querySelector('.button_type_trash').addEventListener('click', (evt) => {
             this._handleTrashClick(evt);
         });
-        cardElement.querySelector('.button_type_like').addEventListener('click', (evt) => {
+        this._element.querySelector('.button_type_like').addEventListener('click', (evt) => {
             this._handleLikeClick(evt);
         });
-        cardElement.querySelector('.card__pic').addEventListener('click', () => {
+        this._element.querySelector('.card__pic').addEventListener('click', () => {
             this._handlePicClick();
         });
     }
 
     _handleTrashClick(evt) {
         evt.target.closest('.card').remove();
+        this._element = null;
     }
 
     _handleLikeClick(evt) {

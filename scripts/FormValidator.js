@@ -53,7 +53,7 @@ export default class FormValidator {
 
     _isValid(inputElement) {
         const state = inputElement.validity.valid;
-        const errorElement = document.querySelector(`.${inputElement.name}-error`);
+        const errorElement = document.querySelector(`.${inputElement.id}-error`);
         if (state) {
             this._hideInputError(inputElement, errorElement);
         }

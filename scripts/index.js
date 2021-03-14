@@ -1,40 +1,15 @@
 import Card from "./Card.js";
 import FormValidator from "./FormValidator.js";
+import { initialCards } from "./initial-cards.js";
 
 const editFormContainer = document.querySelector('#editForm');
 const addFormContainer = document.querySelector('#addForm');
 const profileName = document.querySelector('.profile__name');
 const profileOccupation = document.querySelector('.profile__occupation');
-const popupInputName = document.forms.editForm.elements.inputName;
-const popupInputOccupation = document.forms.editForm.elements.inputOccupation;
-const popupInputDescr = document.forms.addForm.elements.inputDescr;
-const popupInputUrl = document.forms.addForm.elements.inputUrl;
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
+const popupInputName = document.querySelector('#inputName');
+const popupInputOccupation = document.querySelector('#inputOccupation');
+const popupInputDescr = document.querySelector('#inputDescr');
+const popupInputUrl = document.querySelector('#inputUrl');
 const cardsSection = document.querySelector('.cards');
 const settings = {
   formSelector: '.popup__container',
