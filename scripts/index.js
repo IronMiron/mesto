@@ -36,8 +36,7 @@ function handleCardClick(name, link) {
   popupImage.src = link;
   popupImage.alt = name;
   popupImageTitle.textContent = name;
-  popupElement.classList.add('popup_opened');
-  document.addEventListener('keyup', pressKey);
+  openPopup(popupElement);
 }
 
 function openPopup(popupElement) {
@@ -67,15 +66,13 @@ function showEditPopup(evt) {
   popupInputName.value = profileName.textContent;
   popupInputOccupation.value = profileOccupation.textContent;
   openPopup(editFormContainer);
-  const validator = new FormValidator(settings, editFormContainer);
-  validator.resetValidation();
+  validatorEdit.resetValidation();
 }
 
 function showAddPopup(evt) {
   document.forms.addForm.reset();
   openPopup(addFormContainer);
-  const validator = new FormValidator(settings, addFormContainer);
-  validator.resetValidation();
+  validatorAdd.resetValidation();
 }
 
 function createCard(data) {
@@ -102,7 +99,8 @@ document.querySelectorAll('.popup').forEach((popup) => {
   });
 });
 
-Array.from(document.querySelectorAll(settings.formSelector)).forEach((form) => {
-  const validator = new FormValidator(settings, form);
-  validator.enableValidation();
-});
+const validatorEdit = new FormValidator(settings, editFormContainer);
+validatorEdit.enableValidation();
+
+const validatorAdd = new FormValidator(settings, addFormContainer);
+validatorAdd.enableValidation();
