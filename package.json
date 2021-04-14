@@ -1,0 +1,26 @@
+{
+  "name": "mesto",
+  "version": "1.0.0",
+  "description": "* Интро\r * Figma\r * Javascript\r * Ссылка на проект\r * Контакты",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "webpack": "^5.32.0",
+    "webpack-cli": "^4.6.0",
+    "webpack-dev-server": "^3.11.2"
+  },
+  "scripts": {
+    "build": "rd /s /q dist && webpack --mode production",
+	"dev": "webpack serve"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IronMiron/mesto.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/IronMiron/mesto/issues"
+  },
+  "homepage": "https://github.com/IronMiron/mesto#readme"
+}
