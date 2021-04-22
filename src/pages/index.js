@@ -8,8 +8,6 @@ import "./index.css";
 
 const popupInputName = document.querySelector('#inputName');
 const popupInputOccupation = document.querySelector('#inputOccupation');
-const popupInputDescr = document.querySelector('#inputDescr');
-const popupInputUrl = document.querySelector('#inputUrl');
 
 const curUserInfo = new UserInfo({
   nameSelector: '.profile__name', 
