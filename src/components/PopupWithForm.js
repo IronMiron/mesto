@@ -11,18 +11,26 @@ export default class PopupWithForm extends Popup {
     }
 
     _getInputValues() {
-
+        const valueArray = [];
+        this.validator._inputList.forEach(input => {
+            valueArray.push(input.value);
+        });
+        console.log(valueArray);
+        return valueArray;
     }
 
     setEventListeners() {
         super.setEventListeners();
-        this._popup.addEventListener('submit', this._submitHandler);
+        this._popup.addEventListener('submit', (evt) => {
+            const valueArray = this._getInputValues();
+            this._submitHandler(valueArray);
+        });
     }
 
     close() {
         super.close();
-        for (var i = 0; i < document.forms.length; i++) {
-            document.forms[i].reset();
-        }
+        this.validator._inputList.forEach(input => {
+            input.value = '';
+        });
     }
 }

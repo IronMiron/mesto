@@ -4,7 +4,7 @@ import Section from "../components/Section.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
-import "../pages/index.css";
+import "./index.css";
 
 const popupInputName = document.querySelector('#inputName');
 const popupInputOccupation = document.querySelector('#inputOccupation');
@@ -16,19 +16,32 @@ const curUserInfo = new UserInfo({
   infoSelector: '.profile__occupation',
 });
 
-const addPopup = new PopupWithForm('#addForm', (evt) => {
+const popupCard = new PopupWithImage('#cardImage');
+popupCard.setEventListeners();
+
+const cardsSection = new Section({
+  items: initialCards, 
+  renderer: (item) => {
+    const cardElement = new Card(item, '#card', ({name, link}) => {
+      popupCard.open({name, link});
+    });
+    return cardElement.getCard();
+  }}, '.cards');
+cardsSection.renderItems();
+
+const addPopup = new PopupWithForm('#addForm', (valueArray) => {
   cardsSection.addItem({
-    name: popupInputDescr.value,
-    link: popupInputUrl.value,
+    name: valueArray[0],
+    link: valueArray[1],
   });
   addPopup.close();
 });
 addPopup.setEventListeners();
 
-const editPopup = new PopupWithForm('#editForm', (evt) => {
+const editPopup = new PopupWithForm('#editForm', (valueArray) => {
   curUserInfo.setUserInfo({
-    name: popupInputName.value,
-    info: popupInputOccupation.value,
+    name: valueArray[0],
+    info: valueArray[1],
   });
   editPopup.close();
 });
@@ -45,16 +58,3 @@ document.querySelector('.button_type_add').addEventListener('click', (evt) => {
   addPopup.open()
   addPopup.validator.resetValidation();
 });
-
-const popupCard = new PopupWithImage('#cardImage');
-popupCard.setEventListeners();
-
-const cardsSection = new Section({
-  items: initialCards, 
-  renderer: (item) => {
-    const cardElement = new Card(item, '#card', ({name, link}) => {
-      popupCard.open({name, link});
-    });
-    return cardElement.getCard();
-  }}, '.cards');
-cardsSection.renderItems();
