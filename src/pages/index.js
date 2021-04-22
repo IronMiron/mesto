@@ -3,6 +3,8 @@ import { initialCards } from "../utils/initial-cards.js";
 import Section from "../components/Section.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
+import Validator from "../components/FormValidator.js";
+import { settings } from "../utils/settings.js";
 import UserInfo from "../components/UserInfo.js";
 import "./index.css";
 
@@ -27,19 +29,23 @@ const cardsSection = new Section({
   }}, '.cards');
 cardsSection.renderItems();
 
-const addPopup = new PopupWithForm('#addForm', (valueArray) => {
+const addValidator = new Validator(settings, '#addForm');
+addValidator.enableValidation();
+const addPopup = new PopupWithForm('#addForm', (values) => {
   cardsSection.addItem({
-    name: valueArray[0],
-    link: valueArray[1],
+    name: values.inputDescr,
+    link: values.inputUrl,
   });
   addPopup.close();
 });
 addPopup.setEventListeners();
 
-const editPopup = new PopupWithForm('#editForm', (valueArray) => {
+const editValidator = new Validator(settings, '#editForm');
+editValidator.enableValidation();
+const editPopup = new PopupWithForm('#editForm', (values) => {
   curUserInfo.setUserInfo({
-    name: valueArray[0],
-    info: valueArray[1],
+    name: values.inputName,
+    info: values.inputOccupation,
   });
   editPopup.close();
 });
@@ -50,9 +56,9 @@ document.querySelector('.button_type_edit').addEventListener('click', (evt) => {
   popupInputName.value = name;
   popupInputOccupation.value = info;
   editPopup.open();
-  editPopup.validator.resetValidation();
+  editValidator.resetValidation();
 });
 document.querySelector('.button_type_add').addEventListener('click', (evt) => {
   addPopup.open()
-  addPopup.validator.resetValidation();
+  addValidator.resetValidation();
 });
