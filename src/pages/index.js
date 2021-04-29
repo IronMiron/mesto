@@ -2,6 +2,7 @@ import Card from "../components/Card.js";
 import Section from "../components/Section.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
+import PopupWithConfirm from "../components/PopupWithConfirm.js";
 import Validator from "../components/FormValidator.js";
 import { settings } from "../utils/settings.js";
 import UserInfo from "../components/UserInfo.js";
@@ -26,6 +27,15 @@ const api = new Api({
 const popupCard = new PopupWithImage('#cardImage');
 popupCard.setEventListeners();
 
+const confirmPopup = new PopupWithConfirm('#confirm', (evt) => {
+  api.deleteCard(confirmPopup._id)
+    .then((res) => {
+      confirmPopup._callerElement.remove();
+      confirmPopup.close();
+    })
+    .catch(errHandler);
+});
+confirmPopup.setEventListeners();
 
 const cardsSection = new Section({
   items: [],
@@ -34,17 +44,7 @@ const cardsSection = new Section({
       popupCard.open({ name, link });
     },
       (evt) => {
-        const confirmPopup = new PopupWithForm('#confirm', (values) => {
-          api.deleteCard(cardElement._picId)
-            .then((res) => {
-              evt.target.closest('.card').remove();
-              cardElement._element = null;
-              confirmPopup.close();
-            })
-            .catch(errHandler);
-        });
-        confirmPopup.setEventListeners();
-        confirmPopup.open();
+        confirmPopup.open(cardElement._picId, evt.target.closest('.card'));
       },
       (evt) => {
         api.likeCard(cardElement._picId, cardElement._isLiked())
@@ -59,25 +59,19 @@ const cardsSection = new Section({
   }
 }, '.cards');
 
-api.getUser()
-  .then((user) => {
+Promise.all([api.getUser(), api.getInitialCards()])
+  .then((res) => {
+    const [user, cards] = res;
     curUserInfo.setUserInfo({
       name: user.name,
       info: user.about,
     });
     curUserInfo.setAvatar(user.avatar);
-    return user._id;
-  })
-  .then((userId) => {
-    Card.prototype._userId = userId;
-    api.getInitialCards()
-      .then((cards) => {
-        cards.reverse();
-        cards.forEach((card) => {
-          cardsSection.addItem(card);
-        });
-      })
-      .catch(errHandler);
+    Card.prototype._userId = user._id;
+    cards.reverse();
+    cards.forEach((card) => {
+      cardsSection.addItem(card);
+    });
   })
   .catch(errHandler);
 
@@ -113,12 +107,12 @@ const editPopup = new PopupWithForm('#editForm', (values) => {
         name: res.name,
         info: res.about,
       });
+      editPopup.close();
     })
     .catch(errHandler)
     .finally(() => {
       editPopup._submitButton.textContent = 'Сохранить';
     });
-  editPopup.close();
 });
 editPopup.setEventListeners();
 
