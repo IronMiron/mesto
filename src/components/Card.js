@@ -1,9 +1,14 @@
 export default class Card {
-    constructor(data, templateSelector, handleCardClick) {
+    constructor(data, templateSelector, handleCardClick, handleTrashClick, handleLikeClick) {
         this._name = data.name;
         this._link = data.link;
+        this._likes = data.likes;
+        this._ownerId = data.owner._id;
+        this._picId = data._id;
         this._template = document.querySelector(templateSelector).content;
         this._handlePicClick = handleCardClick;
+        this._handleTrashClick = handleTrashClick;
+        this._handleLikeClick = handleLikeClick;
     }
 
     getCard() {
@@ -11,6 +16,8 @@ export default class Card {
             this._element = this._getTemplate();
             this._setPicture();
             this._setDescription();
+            this._setLikes();
+            this._setTrash();
             this._setEventListeners();
         }
         return this._element;
@@ -31,6 +38,30 @@ export default class Card {
         cardDescription.textContent = this._name;
     }
 
+    _setLikes() {
+        const cardLikes = this._element.querySelector('.card__likes-counter');
+        cardLikes.textContent = this._likes.length;
+        if (this._isLiked()) {
+            const cardLike = this._element.querySelector('.button_type_like');
+            cardLike.classList.add('button_type_liked');
+        }
+    }
+
+    _setTrash() {
+        const cardTrash = this._element.querySelector('.button_type_trash');
+        cardTrash.hidden = !this._isDeletable();
+    }
+
+    _isDeletable() {
+        return (this._userId === this._ownerId)
+    }
+
+    _isLiked() {
+        return (this._likes.find((like, index) => {
+            return (like._id === this._userId) ? true : false;
+        })) ? true : false;
+    }
+
     _setEventListeners() {
         this._element.querySelector('.button_type_trash').addEventListener('click', (evt) => {
             this._handleTrashClick(evt);
@@ -39,17 +70,7 @@ export default class Card {
             this._handleLikeClick(evt);
         });
         this._element.querySelector('.card__pic').addEventListener('click', () => {
-            this._handlePicClick({name: this._name, link: this._link});
+            this._handlePicClick({ name: this._name, link: this._link });
         });
     }
-
-    _handleTrashClick(evt) {
-        evt.target.closest('.card').remove();
-        this._element = null;
-    }
-
-    _handleLikeClick(evt) {
-        evt.target.classList.toggle('button_type_liked');
-    }
-
 }
